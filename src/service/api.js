@@ -183,6 +183,10 @@ class Http {
   async post(url, data) {
     return this._request("POST", url, data);
   }
+
+  async put(url, data) {
+    return this._request("PUT", url, data);
+  }
 }
 
 export const api = new Http({
@@ -190,7 +194,7 @@ export const api = new Http({
   credentials: "include",
   headers: {
     Accept: "application/json",
-  }
+  },
 });
 
 function getXSRFToken() {

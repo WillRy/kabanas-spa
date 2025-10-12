@@ -1,7 +1,9 @@
+import UpdateSettingsForm from "../features/settings/UpdateSettingsForm.jsx"
+
 function Settings() {
     return (
-        <div>
-            Settings
+        <div className="">
+            <UpdateSettingsForm />
         </div>
     )
 }

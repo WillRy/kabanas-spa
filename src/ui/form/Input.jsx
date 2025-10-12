@@ -3,7 +3,7 @@ function Input({ ref, type = "text", ...props }) {
     <input
       ref={ref}
       type={type}
-      className="w-full block p-2 border border-primary-100 outline-0 focus:ring-2 focus:ring-primary-400 rounded-md disabled:bg-stone-100 text-sm"
+      className="w-full block p-2 border border-primary-100 outline-0 focus:outline-2 focus:outline-offset-[-1px] focus:outline-primary-600 rounded-md disabled:bg-stone-100 text-sm"
       {...props}
     />
   );
