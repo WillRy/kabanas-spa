@@ -21,6 +21,8 @@ function App() {
         gutter={12}
         containerStyle={{
           margin: "8px",
+          zIndex: 9999,
+          opacity: 1,
         }}
         toastOptions={{
           success: {
@@ -35,6 +37,7 @@ function App() {
             padding: "16px 24px",
             backgroundColor: "var(--color-grey-0)",
             color: "var(--color-grey-700)",
+            zIndex: 9999,
           },
         }}
       />
@@ -50,14 +53,14 @@ function App() {
               </ProtectedRoute>
             }
           >
-             <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/bookings" element={<Bookings />} />
-              {/* <Route path="/bookings/:bookingId" element={<Booking />} /> */}
-              {/* <Route path="/checkin/:bookingId" element={<Checkin />} /> */}
-              <Route path="/properties" element={<Properties />} />
-              <Route path="/users" element={<Users />} />
-              <Route path="/settings" element={<Settings />} />
-              <Route path="/account" element={<Account />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/bookings" element={<Bookings />} />
+            {/* <Route path="/bookings/:bookingId" element={<Booking />} /> */}
+            {/* <Route path="/checkin/:bookingId" element={<Checkin />} /> */}
+            <Route path="/properties" element={<Properties />} />
+            <Route path="/users" element={<Users />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/account" element={<Account />} />
           </Route>
         </Routes>
       </BrowserRouter>

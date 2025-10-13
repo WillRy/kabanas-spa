@@ -8,6 +8,7 @@ import {
   Users,
 } from "lucide-react";
 import { Link, NavLink, Outlet } from "react-router";
+
 function AppLayout() {
   return (
     <div className="h-screen w-screen flex overflow-hidden">
@@ -79,7 +80,7 @@ function AppLayout() {
       </div>
       <div className="flex-1 flex flex-col overflow-auto">
         <header className="flex items-center h-15 bg-white border-b border-slate-100 px-12"></header>
-        <main className="px-6 pt-10 flex-1 overflow-auto">
+        <main className="px-6 py-10 flex-1 overflow-auto">
           <Outlet />
         </main>
       </div>

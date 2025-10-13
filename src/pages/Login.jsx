@@ -13,6 +13,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import toast from "react-hot-toast";
 import Alert from "../ui/alert/Alert.jsx";
 import { useNavigate } from "react-router";
+import SpinnerMini from "../ui/SpinnerMini.jsx";
 
 const schema = yup.object({
   email: yup.string().email("Invalid email").required("Email is required"),
@@ -74,7 +75,7 @@ function Login() {
         </FormRow>
 
         <Button disabled={isPending} type="submit" full>
-          Log In
+          {isPending ? <SpinnerMini /> : "Log In"}
         </Button>
       </form>
     </div>

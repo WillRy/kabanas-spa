@@ -104,18 +104,32 @@ class Http {
     return responseData;
   }
 
-  async _request(method, url, data = null) {
+  async _request(method, url, data = null, options = {}) {
+    debugger;
+    const headers = {
+      ...(this.options.headers || {}),
+      ...(options.headers || {}),
+    }
+
+    const optionsWithoutHeaders = {...this.options, ...options };
+    delete optionsWithoutHeaders.headers;
+
     let requestOptions = {
-      ...this.options,
-      method,
+      ...optionsWithoutHeaders,
       headers: {
-        ...(this.options.headers || {}),
+        ...headers,
       },
+      method,
     };
 
     if (data) {
-      requestOptions.headers["Content-Type"] = "application/json";
-      requestOptions.body = JSON.stringify(data);
+      requestOptions.headers["Content-Type"] = headers['Content-Type'] ?? "application/json";
+
+      if( requestOptions.headers['Content-Type'] === 'multipart/form-data') {
+        delete requestOptions.headers['Content-Type'];
+      }
+
+      requestOptions.body = requestOptions.headers['Content-Type'] === 'application/json' ? JSON.stringify(data) : data;
     }
 
     // Apply request interceptors
@@ -180,8 +194,8 @@ class Http {
     return this._request("GET", url);
   }
 
-  async post(url, data) {
-    return this._request("POST", url, data);
+  async post(url, data, options = {}) {
+    return this._request("POST", url, data, options);
   }
 
   async put(url, data) {
