@@ -35,6 +35,13 @@ const ButtonVariants = cva(
           "hover:bg-gray-100",
           "focus:ring-primary-400",
         ],
+        danger: [
+          "border-transparent",
+          "bg-red-600",
+          "text-white",
+          "hover:bg-red-700",
+          "focus:ring-red-400",
+        ]
       },
       size: {
         sm: ["text-base", "py-0.5", "px-1", "font-semibold"],

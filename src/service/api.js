@@ -105,13 +105,12 @@ class Http {
   }
 
   async _request(method, url, data = null, options = {}) {
-    debugger;
     const headers = {
       ...(this.options.headers || {}),
       ...(options.headers || {}),
-    }
+    };
 
-    const optionsWithoutHeaders = {...this.options, ...options };
+    const optionsWithoutHeaders = { ...this.options, ...options };
     delete optionsWithoutHeaders.headers;
 
     let requestOptions = {
@@ -123,13 +122,17 @@ class Http {
     };
 
     if (data) {
-      requestOptions.headers["Content-Type"] = headers['Content-Type'] ?? "application/json";
+      requestOptions.headers["Content-Type"] =
+        headers["Content-Type"] ?? "application/json";
 
-      if( requestOptions.headers['Content-Type'] === 'multipart/form-data') {
-        delete requestOptions.headers['Content-Type'];
+      if (requestOptions.headers["Content-Type"] === "multipart/form-data") {
+        delete requestOptions.headers["Content-Type"];
       }
 
-      requestOptions.body = requestOptions.headers['Content-Type'] === 'application/json' ? JSON.stringify(data) : data;
+      requestOptions.body =
+        requestOptions.headers["Content-Type"] === "application/json"
+          ? JSON.stringify(data)
+          : data;
     }
 
     // Apply request interceptors
@@ -200,6 +203,10 @@ class Http {
 
   async put(url, data) {
     return this._request("PUT", url, data);
+  }
+
+  async delete(url, data) {
+    return this._request("DELETE", url, data);
   }
 }
 

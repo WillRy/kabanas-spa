@@ -2,31 +2,27 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { api } from "../../service/api.js";
 import toast from "react-hot-toast";
 
-export function useCreateProperty() {
+export function useDeleteProperty() {
   const queryClient = useQueryClient();
   const { mutate, isPending } = useMutation({
-    mutationFn: async ({ data }) => {
-      return api.post("/property", data, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+    mutationFn: async (id) => {
+      return api.delete(`/property/${id}`);
     },
     onSuccess: () => {
-      toast.success("Property created successfully");
+      toast.success("Property deleted successfully");
       queryClient.invalidateQueries({ queryKey: ["properties"] });
     },
     onError: (error) => {
       console.log(error);
       const message =
         error?.body?.message ||
-        "An error occurred while creating the property.";
+        "An error occurred while deleting the property.";
       toast.error(message);
     },
   });
 
   return {
-    createProperty: mutate,
-    isCreatingProperty: isPending,
+    deleteProperty: mutate,
+    isDeletingProperty: isPending,
   };
 }

@@ -6,9 +6,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import TextArea from "../../ui/form/TextArea.jsx";
 import FileInput from "../../ui/form/FileInput.jsx";
 import Button from "../../ui/button/Button.jsx";
-import { useMutation } from "@tanstack/react-query";
 import { useCreateProperty } from "./useCreateProperty.js";
 import SpinnerMini from "../../ui/SpinnerMini.jsx";
+import useEditProperty from "./useEditProperty.js";
 
 const schema = yup.object({
   name: yup.string().required("Property name is required"),
@@ -26,7 +26,8 @@ const schema = yup.object({
     .number()
     .transform((value) => (isNaN(value) ? undefined : value))
     .min(0, "At least 0")
-    .default(0),
+    .default(0)
+    .nullable(),
   description: yup.string().required("Description is required"),
   image: yup.mixed().nullable(),
 });
@@ -48,35 +49,42 @@ export default function CreatePropertyForm({
     reset,
   } = useForm({
     resolver: yupResolver(schema),
+    defaultValues: isEditSession ? editValues : {},
   });
 
-  const { createProperty, isCreatingProperty } = useCreateProperty({});
+  const { createProperty, isCreatingProperty } = useCreateProperty();
+  const { editProperty, isEditingProperty } = useEditProperty();
 
-  const isWorking = isCreatingProperty;
+  const isWorking = isCreatingProperty || isEditingProperty;
 
   function handleForm(data) {
-    debugger;
     const image = typeof data.image === "string" ? data.image : data.image?.[0];
-
-    if (isEditSession) {
-      // updateProperty({...data, id: propertyId});
-      return;
-    }
 
     const formData = new FormData();
     Object.entries(data).forEach(([key, value]) => {
-      
-      if (key === "image") {
-        formData.append(key, image ?? null);
-      } else {
-        formData.append(key, value);
+      let val = value || "";
+
+      if (key === "image" && image instanceof File) {
+        formData.append(key, image);
       }
+
+      if (key !== "image") formData.append(key, val);
     });
 
-    console.log(data);
+    if (isEditSession) {
+      editProperty(
+        { data: formData, id: editId },
+        {
+          onSuccess() {
+            onCloseModal?.();
+          },
+        }
+      );
+      return;
+    }
 
     createProperty(
-      formData,
+      { data: formData },
       {
         onSuccess() {
           reset();
