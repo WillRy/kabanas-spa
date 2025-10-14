@@ -100,7 +100,7 @@ function List({ id, children }) {
   if (openId !== id) return null;
 
   return createPortal(
-    <ul ref={ref} style={{ right: `${position.x}px`, top: `${position.y}px` }} className="fixed w-40 bg-white shadow-sm rounded-md">
+    <ul ref={ref} style={{ right: `${position.x}px`, top: `${position.y}px` }} className="fixed  bg-white shadow-sm rounded-md">
       {children}
     </ul>,
     document.body

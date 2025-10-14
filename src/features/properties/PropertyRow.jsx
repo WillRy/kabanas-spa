@@ -37,11 +37,11 @@ export default function PropertyRow({ property }) {
             <Menus.Menu>
               <Menus.Toggle id={property.id} />
               <Menus.List id={property.id}>
-                <Modal.Open name="edit">
+                <Modal.Open opens="edit">
                   <Menus.Button icon={<Edit />}>Edit</Menus.Button>
                 </Modal.Open>
 
-                <Modal.Open name="confirm-delete">
+                <Modal.Open opens="confirm-delete">
                   <Menus.Button icon={<Trash />}>Delete</Menus.Button>
                 </Modal.Open>
               </Menus.List>
@@ -49,11 +49,15 @@ export default function PropertyRow({ property }) {
               <Modal.Window name="edit">
                 <CreatePropertyForm propertyToEdit={property} />
               </Modal.Window>
-              <Modal.Window name="confirm-delete">
-                <ConfirmDelete disabled={isDeletingProperty} onConfirm={() => deleteProperty(property.id)} resourceName={"Property"} />
-              </Modal.Window>
             </Menus.Menu>
           </Menus>
+          <Modal.Window name="confirm-delete">
+            <ConfirmDelete
+              disabled={isDeletingProperty}
+              onConfirm={() => deleteProperty(property.id)}
+              resourceName={"Property"}
+            />
+          </Modal.Window>
         </Modal>
       </div>
     </Table.Row>
