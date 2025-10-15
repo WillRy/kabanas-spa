@@ -9,7 +9,7 @@ function TodayItem({ activity }) {
   const { checkout, isCheckingOut } = useCheckout();
 
   return (
-    <li className="grid grid-cols-[6rem_1rem_1fr_0.6fr_1fr] gap-3 items-center text-sm py-2 border-b border-gray-100 first:border-t first:border-t-gray-100">
+    <li className="grid grid-cols-[6rem_1rem_1fr_0.6fr_0.4fr] gap-3 items-center text-sm py-2 px-1 border-b border-gray-100 first:border-t first:border-t-gray-100">
       {status === "unconfirmed" && <Tag type="green">Arriving</Tag>}
       {status === "checked-in" && <Tag type="blue">Departing</Tag>}
 
