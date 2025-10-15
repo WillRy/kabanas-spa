@@ -14,7 +14,7 @@ export function useUpdateSettings() {
     },
     onError: (error) => {
         
-      toast.error(error?.body?.message ?? "Error updating settings");
+      toast.error(error?.data?.message ?? "Error updating settings");
     },
   });
 

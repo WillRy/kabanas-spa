@@ -1,10 +1,10 @@
 // ...existing code...
 class HttpError extends Error {
-  constructor({ response, body }) {
+  constructor({ response, data }) {
     super(`HTTP Error: ${response.status} ${response.statusText}`);
     this.name = "HttpError";
     this.response = response;
-    this.body = body;
+    this.data = data;
   }
 }
 
@@ -182,7 +182,7 @@ class Http {
       if (!finalResponse.ok) {
         throw new HttpError({
           response: finalResponse,
-          body: finalData,
+          data: finalData,  
         });
       }
 

@@ -11,6 +11,7 @@ import { useNavigate } from "react-router";
 import ConfirmDelete from "../../ui/modal/ConfirmDelete.jsx";
 import Modal from "../../ui/modal/Modal.jsx";
 import { formatCurrency, formatDistanceFromNow } from "../../utils/helpers";
+import { useCheckout } from "../check-in-out/useCheckout.js";
 
 function BookingRow({
   booking: {
@@ -26,10 +27,7 @@ function BookingRow({
 }) {
   const navigate = useNavigate();
 
-  const { checkout, isCheckingOut } = {
-    checkout: () => Promise.resolve(),
-    isCheckingOut: false,
-  };
+  const { checkout, isCheckingOut } = useCheckout();
 
   const { deleteBooking, isDeletingBooking } = useDeleteBooking();
 
@@ -87,7 +85,7 @@ function BookingRow({
             {status === "checked-in" && (
               <Menus.Button
                 icon={<ArrowUpSquare />}
-                onClick={() => checkout(bookingId)}
+                onClick={() => checkout({bookingId})}
                 disabled={isCheckingOut}
               >
                 Check Out

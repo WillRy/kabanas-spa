@@ -19,7 +19,7 @@ export function useCreateProperty() {
     onError: (error) => {
       console.log(error);
       const message =
-        error?.body?.message ||
+        error?.data?.message ||
         "An error occurred while creating the property.";
       toast.error(message);
     },

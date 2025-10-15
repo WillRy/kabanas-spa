@@ -68,7 +68,7 @@ function Row({ children }) {
 
 function Footer({ children }) {
   return (
-    <footer className="bg-gray-50 flex justify-center p-2">{children}</footer>
+    <footer className="bg-gray-50 flex justify-center py-4 px-2">{children}</footer>
   );
 }
 

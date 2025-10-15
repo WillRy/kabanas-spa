@@ -18,7 +18,7 @@ export default function useEditProperty() {
     },
     onError: (error) => {
       const message =
-        error?.body?.message ||
+        error?.data?.message ||
         "An error occurred while updating the property.";
       toast.error(message);
     },

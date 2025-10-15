@@ -1,15 +1,17 @@
-import { BrowserRouter, Navigate, Outlet, Route, Routes } from "react-router";
-import Login from "./pages/Login.jsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "react-hot-toast";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router";
 import ProtectedRoute from "./features/authentication/ProtectedRoutes.jsx";
-import AppLayout from "./ui/AppLayout.jsx";
-import Dashboard from "./pages/Dashboard.jsx";
-import Bookings from "./pages/Bookings.jsx";
 import Account from "./pages/Account.jsx";
+import Booking from "./pages/Booking.jsx";
+import Bookings from "./pages/Bookings.jsx";
+import Checkin from "./pages/Checkin.jsx";
+import Dashboard from "./pages/Dashboard.jsx";
+import Login from "./pages/Login.jsx";
 import Properties from "./pages/Properties.jsx";
-import Users from "./pages/Users.jsx";
 import Settings from "./pages/Settings.jsx";
+import Users from "./pages/Users.jsx";
+import AppLayout from "./ui/AppLayout.jsx";
 
 const queryClient = new QueryClient();
 
@@ -55,8 +57,8 @@ function App() {
           >
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/bookings" element={<Bookings />} />
-            {/* <Route path="/bookings/:bookingId" element={<Booking />} /> */}
-            {/* <Route path="/checkin/:bookingId" element={<Checkin />} /> */}
+            <Route path="/bookings/:bookingId" element={<Booking />} />
+            <Route path="/checkin/:bookingId" element={<Checkin />} />
             <Route path="/properties" element={<Properties />} />
             <Route path="/users" element={<Users />} />
             <Route path="/settings" element={<Settings />} />

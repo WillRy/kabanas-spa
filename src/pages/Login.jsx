@@ -42,7 +42,7 @@ function Login() {
       return api.post("/auth/login", data);
     },
     onSuccess: (data) => {
-      queryClient.setQueryData(["user"], data.data.user);
+      queryClient.setQueryData(["user"], data);
       navigate("/dashboard", { replace: true });
     },
     onError: (error) => {

@@ -45,8 +45,8 @@ const ButtonVariants = cva(
       },
       size: {
         sm: ["text-base", "py-0.5", "px-1", "font-semibold"],
-        md: ["text-base","py-1.5","px-2", "font-medium"],
-        lg: ["text-lg","py-2","px-4", "font-medium"],
+        md: ["text-base","py-3","px-4", "font-medium"],
+        lg: ["text-lg","py-4","px-4", "font-medium"],
       },
       full: {
         true: ["w-full"],

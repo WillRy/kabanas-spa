@@ -15,7 +15,7 @@ export function useDeleteProperty() {
     onError: (error) => {
       console.log(error);
       const message =
-        error?.body?.message ||
+        error?.data?.message ||
         "An error occurred while deleting the property.";
       toast.error(message);
     },

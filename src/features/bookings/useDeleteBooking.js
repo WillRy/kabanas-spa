@@ -14,7 +14,7 @@ export function useDeleteBooking() {
     },
     onError: (error) => {
       const message =
-        error?.body?.message || "An error occurred while deleting the booking.";
+        error?.data?.message || "An error occurred while deleting the booking.";
       toast.error(message);
     },
   });
