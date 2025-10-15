@@ -52,7 +52,7 @@ function Sidebar() {
             Properties
           </NavLink>
         </li>
-        <li>
+        {/* <li>
           <NavLink
             to="/users"
             className={
@@ -62,7 +62,7 @@ function Sidebar() {
             <Users className="group-hover:text-indigo-600 group-aria-[current=page]:text-indigo-600" />
             Users
           </NavLink>
-        </li>
+        </li> */}
         <li>
           <NavLink
             to="/settings"

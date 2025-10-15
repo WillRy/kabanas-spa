@@ -2,7 +2,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { useUpdateUser } from "./useUpdateUser.js";
-import Card from "../../ui/Card.jsx";
+import Card from "../../ui/display/Card.jsx";
 import FormRow from "../../ui/form/FormRow.jsx";
 import Input from "../../ui/form/Input.jsx";
 import Button from "../../ui/button/Button.jsx";

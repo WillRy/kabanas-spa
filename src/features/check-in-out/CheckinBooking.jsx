@@ -3,7 +3,7 @@ import { useNavigate } from "react-router";
 import { useErrorNavigate } from "../../hooks/useErrorNavigate.js";
 import Button from "../../ui/button/Button.jsx";
 import ButtonText from "../../ui/button/ButtonText.jsx";
-import Card from "../../ui/Card.jsx";
+import Card from "../../ui/display/Card.jsx";
 import Checkbox from "../../ui/form/Checkbox.jsx";
 import Spinner from "../../ui/Spinner.jsx";
 import Tag from "../../ui/Tag.jsx";

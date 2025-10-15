@@ -1,7 +1,7 @@
 
-import { Link, NavLink, Outlet } from "react-router";
-import Sidebar from "./Sidebar.jsx";
-import Header from "./Header.jsx";
+import { Outlet } from "react-router";
+import Sidebar from "./layout/Sidebar.jsx";
+import Header from "./layout/Header.jsx";
 
 function AppLayout() {
   return (

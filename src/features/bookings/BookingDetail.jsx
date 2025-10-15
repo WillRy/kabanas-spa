@@ -9,7 +9,6 @@ import { useNavigate } from "react-router";
 import { useDeleteBooking } from "./useDeleteBooking.js";
 import Modal from "../../ui/modal/Modal.jsx";
 import ConfirmDelete from "../../ui/modal/ConfirmDelete.jsx";
-import { useCheckin } from "../check-in-out/useCheckIn.js";
 import { useCheckout } from "../check-in-out/useCheckout.js";
 
 export function BookingDetail() {
@@ -17,7 +16,6 @@ export function BookingDetail() {
 
   const { deleteBooking, isDeletingBooking } = useDeleteBooking();
 
-  const { checkin, isCheckingIn } = useCheckin();
   const { checkout, isCheckingOut } = useCheckout();
 
   const navigate = useNavigate();
@@ -54,7 +52,6 @@ export function BookingDetail() {
         {status === "unconfirmed" && (
           <Button
             onClick={() => navigate(`/checkin/${id}`)}
-            disabled={isCheckingIn}
           >
             Check In
           </Button>

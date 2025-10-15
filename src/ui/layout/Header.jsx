@@ -1,5 +1,5 @@
 import HeaderMenu from "./HeaderMenu.jsx";
-import UserAvatar from "./UserAvatar.jsx";
+import UserAvatar from "../UserAvatar.jsx";
 
 function Header() {
   return (

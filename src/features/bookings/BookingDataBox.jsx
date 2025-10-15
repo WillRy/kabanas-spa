@@ -11,7 +11,7 @@ import Button from "../../ui/button/Button.jsx";
 import { formatDistanceFromNow, formatCurrency } from "../../utils/helpers";
 import { format, isToday } from "date-fns";
 import { MessageSquareText } from "lucide-react";
-import DataItem from "../../ui/DataItem.jsx";
+import DataItem from "../../ui/display/DataItem.jsx";
 
 function BookingDataBox({ booking }) {
   const {

@@ -1,6 +1,6 @@
 import { LogOut, User } from "lucide-react";
-import ButtonIcon from "./button/ButtonIcon.jsx";
-import Logout from "../features/authentication/Logout.jsx";
+import ButtonIcon from "../button/ButtonIcon.jsx";
+import Logout from "../../features/authentication/Logout.jsx";
 import { useNavigate } from "react-router";
 
 function HeaderMenu() {

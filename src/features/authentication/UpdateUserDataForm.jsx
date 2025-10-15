@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import Card from "../../ui/Card.jsx";
+import Card from "../../ui/display/Card.jsx";
 import FormRow from "../../ui/form/FormRow.jsx";
 import Input from "../../ui/form/Input.jsx";
 import { useUser } from "./useUser.js";
