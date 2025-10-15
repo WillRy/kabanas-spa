@@ -40,7 +40,6 @@ export default function CreatePropertyForm({
 
   const isEditSession = Boolean(editId);
 
-  console.log("Edit values:", editId, editValues);
 
   const {
     register,
