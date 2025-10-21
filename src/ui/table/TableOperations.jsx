@@ -1,4 +1,4 @@
 
 export default function TableOperations({ children }) {
-  return <div className="flex items-center gap-4">{children}</div>;
+  return <div className="flex flex-wrap items-center gap-4">{children}</div>;
 }

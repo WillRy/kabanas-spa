@@ -7,7 +7,7 @@ function AddProperty() {
     <div>
       <Modal>
         <Modal.Open opens="add-property">
-          <Button>Add Property</Button>
+          <Button size="md">Add Property</Button>
         </Modal.Open>
         <Modal.Window name="add-property">
           <CreatePropertyForm />

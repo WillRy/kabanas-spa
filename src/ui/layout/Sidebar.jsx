@@ -13,7 +13,7 @@ function Sidebar() {
     <div className="w-[260px] flex flex-col bg-white border-r border-slate-100 overflow-auto py-8 px-6 gap-8">
       <div>
         <img
-          src="/logo-light.png"
+          src="/logo2.png"
           alt=""
           className="h-24 mx-auto w-auto max-w-full"
         />
