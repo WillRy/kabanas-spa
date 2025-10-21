@@ -6,7 +6,7 @@ function AddProperty() {
   return (
     <div>
       <Modal>
-        <Modal.Open name="add-property">
+        <Modal.Open opens="add-property">
           <Button>Add Property</Button>
         </Modal.Open>
         <Modal.Window name="add-property">
