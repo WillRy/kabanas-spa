@@ -20,7 +20,7 @@ export function useProperties() {
 
   console.log(page);
 
-  const { data: properties, isPending } = useQuery({
+  const { data: properties, isPending, error } = useQuery({
     queryKey: ["properties", filterValue, sortBy, page],
     queryFn: () => {
       return api.get(
@@ -60,5 +60,5 @@ export function useProperties() {
     }
   }, [queryClient, page, pageCount, filterValue, sortBy, sortBy.field, sortBy.direction]);
 
-  return { properties, isPending };
+  return { properties, isPending, error, total: properties?.data?.total || 0 };
 }

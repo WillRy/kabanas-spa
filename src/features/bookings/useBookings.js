@@ -18,7 +18,7 @@ export function useBookings() {
     direction,
   }), [field, direction]);
 
-  const { data: bookings, isPending } = useQuery({
+  const { data: bookings, isPending, error } = useQuery({
     queryKey: ["bookings", filter, page, sortBy],
     queryFn: async () => {
       return api.get(
@@ -60,5 +60,6 @@ export function useBookings() {
     bookings: bookings?.data?.data || [],
     count: bookings?.data?.total || 0,
     isPending,
+    error
   };
 }

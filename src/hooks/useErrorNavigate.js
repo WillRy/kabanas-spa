@@ -7,7 +7,7 @@ export function useErrorNavigate(error, url) {
   useEffect(() => {
     const message = error?.data?.message || error?.message;
 
-    if(!error) return;
+    if(!error || !message) return navigate(url);
 
     toast.error(message, {
         id: message

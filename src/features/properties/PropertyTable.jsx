@@ -1,3 +1,4 @@
+import { useError } from "../../hooks/useError.js";
 import Pagination from "../../ui/Pagination.jsx";
 import Spinner from "../../ui/Spinner.jsx";
 import Table from "../../ui/table/Table.jsx";
@@ -5,12 +6,14 @@ import PropertyRow from "./PropertyRow.jsx";
 import { useProperties } from "./useProperties.js";
 
 export default function PropertyTable() {
-  const { properties, isPending } = useProperties();
+  const { properties, isPending, error } = useProperties();
 
+  useError(error);
 
   if (isPending) {
     return <Spinner />;
   }
+
 
   return (
     <Table columns="0.6fr 1.8fr 2.2fr 1fr 1fr 1fr">

@@ -6,12 +6,14 @@ import DurationChart from "./DurationChart.jsx";
 // import TodayActivity from "../check-in-out/TodayActivity.jsx";
 import { useProperties } from "../properties/useProperties.js";
 import TodayActivity from "../check-in-out/TodayActivity.jsx";
+import { useUser } from "../authentication/useUser.js";
 
 
 function DashboardLayout() {
+  const {hasPermission} = useUser();
   const {data, isPending: isPendingBookings, numDays} = useRecentBookings();
   // const {confirmedStays, isPending: isPendingStays, numDays} = useRecentStays();
-  const {properties, isPending: isPendingCabins} = useProperties();
+  const {total, isPending: isPendingCabins} = useProperties();
 
   if (isPendingBookings || isPendingCabins) {
     return <Spinner />;
@@ -24,13 +26,13 @@ function DashboardLayout() {
     }
   } = data;
 
-  const propertiesArr = properties?.data?.data ?? [];
-
-
+  if(!hasPermission('manage-bookings')|| !hasPermission('manage-properties')){
+    return <div></div>
+  }
 
   return (
     <div className="grid grid-cols-4 grid-rows-[auto_21rem_auto] gap-[2.4rem]">
-      <Stats bookings={bookings} confirmedStays={confirmedStays} numDays={numDays} cabinCount={propertiesArr.length}/>
+      <Stats bookings={bookings} confirmedStays={confirmedStays} numDays={numDays} cabinCount={total}/>
       <TodayActivity />
       <DurationChart confirmedStays={confirmedStays} />
       <SalesChart bookings={bookings} numDays={numDays}/>

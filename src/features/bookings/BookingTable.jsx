@@ -1,13 +1,17 @@
-import BookingRow from "./BookingRow";
-import Table from "../../ui/table/Table";
+import { useError } from "../../hooks/useError.js";
 import Menus from "../../ui/menus/Menus";
-import Spinner from "../../ui/Spinner";
-import { useBookings } from "./useBookings.js";
 import Pagination from "../../ui/Pagination.jsx";
+import Spinner from "../../ui/Spinner";
+import Table from "../../ui/table/Table";
+import BookingRow from "./BookingRow";
+import { useBookings } from "./useBookings.js";
 
 function BookingTable() {
 
-  const { bookings,count, isPending } = useBookings();
+  const { bookings,count, isPending, error } = useBookings();
+
+  useError(error);
+  
 
   if (isPending) {
     return <Spinner />;

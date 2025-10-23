@@ -10,8 +10,13 @@ export function useUser() {
     retry: false,
   });
 
+  const hasPermission = (permission) => {
+    return data?.data?.permissions?.includes(permission);
+  }
+
   return {
     user: data,
     isPending,
+    hasPermission
   };
 }

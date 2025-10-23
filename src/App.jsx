@@ -13,7 +13,13 @@ import Settings from "./pages/Settings.jsx";
 import Users from "./pages/Users.jsx";
 import AppLayout from "./ui/AppLayout.jsx";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false,
+    }
+  }
+});
 
 function App() {
   return (
