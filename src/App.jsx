@@ -12,6 +12,7 @@ import Properties from "./pages/Properties.jsx";
 import Settings from "./pages/Settings.jsx";
 import Users from "./pages/Users.jsx";
 import AppLayout from "./ui/AppLayout.jsx";
+import BookingCreation from "./pages/BookingCreation.jsx";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -64,6 +65,7 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/bookings" element={<Bookings />} />
             <Route path="/bookings/:bookingId" element={<Booking />} />
+            <Route path="/bookings/new" element={<BookingCreation />} />
             <Route path="/checkin/:bookingId" element={<Checkin />} />
             <Route path="/properties" element={<Properties />} />
             <Route path="/users" element={<Users />} />
