@@ -3,6 +3,7 @@ import AsyncSelect from "react-select/async";
 function AsyncSearch({ ref, load,selected, onChange, ...props }) {
   return (
     <AsyncSelect
+      menuPortalTarget={document.body}
       ref={ref}
       cacheOptions
       loadOptions={load}
