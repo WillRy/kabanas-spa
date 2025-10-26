@@ -3,6 +3,7 @@ import { useRef, useState } from "react";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import * as yup from "yup";
+import { useSetErrors } from "../../hooks/useSetErrors.js";
 import { api } from "../../service/api.js";
 import Button from "../../ui/button/Button.jsx";
 import Card from "../../ui/display/Card.jsx";
@@ -22,11 +23,11 @@ const schema = yup.object({
       return value?.[0] && value?.[1];
     }),
   guests: yup.array().min(1, "At least one guest is required"),
-  notes: yup
+  observations: yup
     .string()
     .optional()
     .nullable()
-    .max(500, "Notes cannot exceed 500 characters"),
+    .max(500, "Observations cannot exceed 500 characters"),
 });
 
 function BookingCreationForm() {
@@ -40,13 +41,14 @@ function BookingCreationForm() {
     getValues,
     control,
     reset,
+    setError,
   } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
       property: null,
       dateRange: [null, null],
       guests: [],
-      notes: "",
+      observations: "",
     },
   });
   const { replace: replaceGuests } = useFieldArray({
@@ -56,13 +58,15 @@ function BookingCreationForm() {
 
   const guests = getValues("guests");
 
-  const { createBooking, isCreating } = useBookingCreation();
+  const { createBooking, isCreating, error } = useBookingCreation();
+  useSetErrors(error, setError, [["startDate", "period"], ["endDate", "period"]]);
 
   const [guest, setGuest] = useState(null);
   const [excludedDates, setExcludedDates] = useState([]);
   const guestSelectRef = useRef();
 
   const [isSearching, setIsSearching] = useState(false);
+
 
   async function loadGuests(inputValue) {
     try {
@@ -153,7 +157,7 @@ function BookingCreationForm() {
       {
         startDate: data.period[0],
         endDate: data.period[1],
-        observation: data.notes,
+        observation: data.observations,
         numGuests: guests.length,
         guest_id: guests.map((guest) => guest.value)[0],
         property_id: data.property.value,
@@ -210,7 +214,6 @@ function BookingCreationForm() {
                     name="period"
                     render={({ field: { onChange, value } }) => (
                       <DateRange
-                        minDate={new Date()}
                         startDate={value?.[0]}
                         endDate={value?.[1]}
                         setDateRange={(range) => {
@@ -258,11 +261,11 @@ function BookingCreationForm() {
               </div>
             </div>
             <div className="mt-4">
-              <FormRow label={"Notes"}>
+              <FormRow label={"Observations"}>
                 <TextArea
-                  {...register("notes")}
+                  {...register("observations")}
                   rows={4}
-                  placeholder="Additional notes about the booking..."
+                  placeholder="Additional observations about the booking..."
                 />
               </FormRow>
             </div>

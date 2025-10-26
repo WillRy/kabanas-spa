@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 
 export function useBookingCreation() {
     const queryClient = useQueryClient();
-    const {mutate, isPending} = useMutation({
+    const {mutate, isPending, error} = useMutation({
         mutationFn: (data) => {
             return api.post("/bookings", data);
         },
@@ -17,5 +17,5 @@ export function useBookingCreation() {
         }
     })
 
-    return {createBooking: mutate, isCreating: isPending};
+    return {createBooking: mutate, isCreating: isPending, error};
 }
