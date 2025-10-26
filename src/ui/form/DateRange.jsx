@@ -10,6 +10,7 @@ const CustomInput = React.forwardRef((props, ref) => (
 function DateRange({ startDate, endDate, setDateRange,onChange, ...props }) {
   return (
     <DatePicker
+      
       dateFormat="dd/MM/yyyy"
       startDate={startDate}
       endDate={endDate}

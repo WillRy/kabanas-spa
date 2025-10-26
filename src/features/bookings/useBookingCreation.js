@@ -13,7 +13,7 @@ export function useBookingCreation() {
             toast.success("Booking created successfully");
         },
         onError: (error) => {
-            toast.error(error.response?.data?.message || "Failed to create booking");
+            toast.error(error?.data?.message || "Failed to create booking");
         }
     })
 

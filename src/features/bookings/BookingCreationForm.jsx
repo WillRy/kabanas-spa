@@ -31,7 +31,7 @@ const schema = yup.object({
 
 function BookingCreationForm() {
   const navigate = useNavigate();
-  
+
   const {
     register,
     formState: { errors, defaultValues },
@@ -65,53 +65,67 @@ function BookingCreationForm() {
   const [isSearching, setIsSearching] = useState(false);
 
   async function loadGuests(inputValue) {
-    setIsSearching(true);
-    const response = await api.get(`/guest/autocomplete?search=${inputValue}`);
+    try {
+      setIsSearching(true);
+      const response = await api.get(
+        `/guest/autocomplete?search=${inputValue}`
+      );
 
-    setIsSearching(false);
-
-    return (response?.data || [])
-      .map((guest) => ({
-        value: guest.id,
-        label: guest.name,
-        ...guest,
-      }))
-      .filter((guest) => {
-        return !getValues("guests").find((g) => g.name === guest.value);
-      });
+      return (response?.data || [])
+        .map((guest) => ({
+          value: guest.id,
+          label: guest.name,
+          ...guest,
+        }))
+        .filter((guest) => {
+          return !getValues("guests").find((g) => g.name === guest.value);
+        });
+    } catch {
+      return [];
+    } finally {
+      setIsSearching(false);
+    }
   }
 
   async function loadProperties(inputValue) {
-    setIsSearching(true);
+    try {
+      setIsSearching(true);
 
-    const response = await api.get(
-      `/property/autocomplete?search=${inputValue}`
-    );
+      const response = await api.get(
+        `/property/autocomplete?search=${inputValue}`
+      );
 
-    setIsSearching(false);
-
-    return (response?.data || []).map((property) => ({
-      value: property.id,
-      label: property.name,
-    }));
+      return (response?.data || []).map((property) => ({
+        value: property.id,
+        label: property.name,
+      }));
+    } catch {
+      return [];
+    } finally {
+      setIsSearching(false);
+    }
   }
 
   async function loadUnavaibleDates(property) {
-    if (!property) return [];
+    try {
+      if (!property) return [];
 
-    setIsSearching(true);
+      setIsSearching(true);
 
-    const response = await api.get(
-      `/property/${property.value}/unavailable-dates`
-    );
+      const response = await api.get(
+        `/property/${property.value}/unavailable-dates`
+      );
 
-    setIsSearching(false);
+      const unavailableDates = (response?.data || []).map(
+        (dateStr) => new Date(dateStr)
+      );
 
-    const unavailableDates = (response?.data || []).map(
-      (dateStr) => new Date(dateStr)
-    );
-
-    setExcludedDates(unavailableDates);
+      setExcludedDates(unavailableDates);
+    } catch {
+      return [];
+    } finally {
+      setIsSearching(false);
+    }
   }
 
   async function onSelectProperty(option) {
@@ -121,15 +135,17 @@ function BookingCreationForm() {
   }
 
   async function onSelectGuest(option) {
-    if (option) {
-      setGuest(option);
-
-      if (!guests.find((g) => g.value === option.value)) {
-        replaceGuests([...guests, option]);
-      }
-
-      setGuest(null);
+    if (!option) {
+      return;
     }
+
+    setGuest(option);
+
+    if (!guests.find((g) => g.value === option.value)) {
+      replaceGuests([...guests, option]);
+    }
+
+    setGuest(null);
   }
 
   function onSubmit(data) {
@@ -194,6 +210,7 @@ function BookingCreationForm() {
                     name="period"
                     render={({ field: { onChange, value } }) => (
                       <DateRange
+                        minDate={new Date()}
                         startDate={value?.[0]}
                         endDate={value?.[1]}
                         setDateRange={(range) => {
@@ -257,7 +274,9 @@ function BookingCreationForm() {
               >
                 Cancel
               </Button>
-              <Button type="submit" disabled={isCreating}>Save</Button>
+              <Button type="submit" disabled={isCreating}>
+                Save
+              </Button>
             </div>
           </form>
         </Card>
