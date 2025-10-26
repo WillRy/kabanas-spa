@@ -5,6 +5,7 @@ import {
   CogIcon,
   HomeIcon,
   Settings,
+  UserRoundCog,
   Users,
 } from "lucide-react";
 import { NavLink } from "react-router";
@@ -72,6 +73,17 @@ function Sidebar() {
           >
             <Settings className="group-hover:text-indigo-600 group-aria-[current=page]:text-indigo-600" />
             Settings
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/account"
+            className={
+              "flex items-center gap-3 py-3 px-6 hover:bg-gray-100 rounded-sm transition-colors group aria-[current=page]:bg-gray-100"
+            }
+          >
+            <UserRoundCog className="group-hover:text-indigo-600 group-aria-[current=page]:text-indigo-600" />
+            Profile
           </NavLink>
         </li>
       </ul>
